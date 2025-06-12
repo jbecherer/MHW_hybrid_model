@@ -21,6 +21,15 @@ It will contains the code necessary to generate all figures and tables featured 
 ---
 ## main library
 `./code_proc/aisst.py`
+`./code_proc/marineHeatWaves.py` slightly modified version git@github.com:ecjoliver/marineHeatWaves.git
+
+
+---
+# Data
+
+- ERA5 variable collection : `./data/NWEuroShelf_era5_1982_2023_allVars_1deg_daily.nc`
+- Bathymetry data on 1 deg grid `./data/bathymetry_1deg.nc`
+- tidal amplitude on 1deg grid : `./data/tidal_current_amplitude_1deg.nc`
 
 --- 
 # ML module
@@ -28,10 +37,11 @@ It will contains the code necessary to generate all figures and tables featured 
 ## Generate the training data for the machine learning module
 `./code_proc/create_training_data.py`
 >   This function generates the training data for the machine learning module based on ERA5 data.
+>
 >   Input: 
->       - `./data/NWEuroShelf_era5_1982_2023_allVars_1deg_daily.nc`
->       - `./data/bathymetry_1deg.nc`
->       - `./data/tidal_current_amplitude_1deg.nc`
+>     - `./data/NWEuroShelf_era5_1982_2023_allVars_1deg_daily.nc`
+>     - `./data/bathymetry_1deg.nc`
+>     - `./data/tidal_current_amplitude_1deg.nc`
 >    OUTPUT:
 >    - Input data: ../data/ml_training/<region>/ml_input_data.csv
 >    - Output data: ../data/ml_training/<region>/ml_output_data.csv
