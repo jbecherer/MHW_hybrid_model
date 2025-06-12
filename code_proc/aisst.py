@@ -88,8 +88,8 @@ def load_tensor_from_csv(file_path):
 def load_normalization_parameters(region):
     ''' get normalization parameters from csv file'''
 
-    norm_in = pd.read_csv('./data/ml_training/' + region + '/ml_norm_params_input.csv')
-    norm_out = pd.read_csv('./data/ml_training/' + region + '/ml_norm_params_output.csv')
+    norm_in = pd.read_csv('../data/ml_training/' + region + '/ml_norm_params_input.csv')
+    norm_out = pd.read_csv('../data/ml_training/' + region + '/ml_norm_params_output.csv')
 
     input_mean = norm_in['mean'].values
     input_std = norm_in['std'].values
@@ -381,7 +381,7 @@ def train_loop(train_loader, test_loader, model, loss_fn, optimizer, epochs, pri
 
 
 #____________________ save and load model ______________________
-def save_model(model, number_hidden_layers, hidden_size, loss_type, epochs, drop_prop=0.0, odir='./models/'):
+def save_model(model, number_hidden_layers, hidden_size, loss_type, epochs, drop_prop=0.0, odir='../models/'):
     ''' Save the model
 
     Parameters
@@ -398,19 +398,24 @@ def save_model(model, number_hidden_layers, hidden_size, loss_type, epochs, drop
         number of epochs
     drop_prop : float (default 0.0)
         dropout probability
-    odir : str (default './models/')
+    odir : str (default '../models/')
         directory where the model is saved
     Returns
     -------
     fname : str
     '''
+
+    if not os.path.exists(odir):
+        os.makedirs(odir)
+
+
     fname = odir + f'torch_HL{number_hidden_layers}x{hidden_size}d{int(str(drop_prop).split(".")[1][0])}_LF{loss_type}_epoch{epochs}.pth'
     torch.save(model.state_dict(), fname)
 
     return fname
 
 
-def load_model(number_hidden_layers, hidden_size, loss_type, epochs, input_size=10, output_size=10, drop_prop=0.0, idir='./models/'):
+def load_model(number_hidden_layers, hidden_size, loss_type, epochs, input_size=10, output_size=10, drop_prop=0.0, idir='../models/'):
     ''' Load the model
 
     Parameters
@@ -431,7 +436,7 @@ def load_model(number_hidden_layers, hidden_size, loss_type, epochs, input_size=
         size of the output
     drop_prop : float (default 0.0)
         dropout probability
-    idir : str (default './models/')
+    idir : str (default '../models/')
         directory where the model is saved
     '''
     model = NeuralNetwork(input_size, hidden_size, output_size, number_hidden_layers, drop_prop=drop_prop) 
@@ -469,7 +474,7 @@ def load_model_from_csv(model_csv: str, region: str, input_size: int) -> torch.n
     number_hidden_layers = int(shape.split('x')[0])
     hidden_size = int(shape.split('x')[1])
 
-    model = load_model(number_hidden_layers, hidden_size, loss_type, epochs=epochs, input_size=input_size, output_size=output_size, drop_prop=drop_prop, idir='./models/' + region + '/' + feature_set + '/')
+    model = load_model(number_hidden_layers, hidden_size, loss_type, epochs=epochs, input_size=input_size, output_size=output_size, drop_prop=drop_prop, idir='../models/' + region + '/' + feature_set + '/')
 
     return model
 
