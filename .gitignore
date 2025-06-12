@@ -2,4 +2,5 @@
 # ignore files in data directory except for the ./data/setup.sh 
 data/*
 !data/setup.sh
-
+# add __pycache__ to the ignore 
+code_proc/__pycache__/
