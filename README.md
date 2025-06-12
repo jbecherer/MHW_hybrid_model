@@ -20,12 +20,14 @@ It will contains the code necessary to generate all figures and tables featured 
 
 ---
 ## main library
-`./code_proc/aisst.py`
-`./code_proc/marineHeatWaves.py` slightly modified version git@github.com:ecjoliver/marineHeatWaves.git
+- `./code_proc/aisst.py`
+-  `./code_proc/marineHeatWaves.py` slightly modified version git@github.com:ecjoliver/marineHeatWaves.git
 
 
 ---
 # Data
+
+use `./data/setup.sh` to download the data and set up the directory structure
 
 - ERA5 variable collection : `./data/NWEuroShelf_era5_1982_2023_allVars_1deg_daily.nc`
 - Bathymetry data on 1 deg grid `./data/bathymetry_1deg.nc`
@@ -54,3 +56,15 @@ It will contains the code necessary to generate all figures and tables featured 
 >    - Validation and test input data: ../data/ml_training/<region>/ml_input_data_valtest.csv
 >    - Validation and test output data: ../data/ml_training/<region>/ml_output_data_valtest.csv
 
+## Train the machine learning module
+`./code_proc/meta_script_ml.sh`
+This the script that runs all the different training scripts.
+
+### Train NN models
+`./code_proc/pytorch_trainAllModels.py`
+This scripts trains all NN models specified in a **csv file** that lies in the `./models/NWEuroShelf/`
+
+
+### Train Linear Regression and Random Forrest models
+`./code_proc/sklearn_training.py`
+This scripts trains a linear regression and random forrest model for a specified region.

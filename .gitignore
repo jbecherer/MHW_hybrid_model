@@ -4,3 +4,6 @@ data/*
 !data/setup.sh
 # add __pycache__ to the ignore 
 code_proc/__pycache__/
+
+# ignore the random forrest model because too big
+models/NWEuroShelf/RF_model_reduced.pkl
