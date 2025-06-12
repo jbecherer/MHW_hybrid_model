@@ -1,0 +1,5 @@
+# git ignore file
+# ignore files in data directory except for the ./data/setup.sh 
+data/*
+!data/setup.sh
+
