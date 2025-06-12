@@ -9,7 +9,38 @@ It will contains the code necessary to generate all figures and tables featured 
 
 ### Download the data
 
+### dependencies
+- scikit-learn
+- xarray
+- numpy
+- pandas
+- matplotlib
+- cartopy
+- torch
+
+---
+## main library
+`./code_proc/aisst.py`
 
 --- 
+# ML module
+
 ## Generate the training data for the machine learning module
+`./code_proc/create_training_data.py`
+>   This function generates the training data for the machine learning module based on ERA5 data.
+>   Input: 
+>       - `./data/NWEuroShelf_era5_1982_2023_allVars_1deg_daily.nc`
+>       - `./data/bathymetry_1deg.nc`
+>       - `./data/tidal_current_amplitude_1deg.nc`
+>    OUTPUT:
+>    - Input data: ../data/ml_training/<region>/ml_input_data.csv
+>    - Output data: ../data/ml_training/<region>/ml_output_data.csv
+>    - Training input data: ../data/ml_training/<region>/ml_input_data_train.csv
+>    - Training output data: ../data/ml_training/<region>/ml_output_data_train.csv
+>    - Validation input data: ../data/ml_training/<region>/ml_input_data_val.csv
+>    - Validation output data: ../data/ml_training/<region>/ml_output_data_val.csv
+>    - Test input data: ../data/ml_training/<region>/ml_input_data_test.csv
+>    - Test output data: ../data/ml_training/<region>/ml_output_data_test.csv
+>    - Validation and test input data: ../data/ml_training/<region>/ml_input_data_valtest.csv
+>    - Validation and test output data: ../data/ml_training/<region>/ml_output_data_valtest.csv
 
