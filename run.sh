@@ -1,16 +1,8 @@
 #!/bin/bash
-#SBATCH --job-name=python_job   # Specify job name
-#SBATCH --partition=compute # Specify partition name interactive, shared, compute
-##SBATCH --mem=16G               # Specify amount of memory needed
-#SBATCH --time=08:00:00         # Set a limit on the total run time
-#SBATCH --output=log/log.python_job.o%j
-#SBATCH --mail-type=FAIL
-#SBATCH --account=uo0119
-
 # this script is just a wrapper for python scripts that use to much compute to be run in my normal interactive ipython session
 
 cd ./code_proc/
-python create_training_data.py
+bash meta_script_ml.sh
 
 #python mpi_dailyNWES.py
 # python cal_mhw_maps.py
