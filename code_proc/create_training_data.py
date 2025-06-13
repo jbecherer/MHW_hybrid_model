@@ -162,17 +162,25 @@ def create_data(region='NorthSea'):
     # years reserved for validation data picked at random one year from each decade
     #validation_years = [1989, 1995, 2001, 2015]
     # larger test set for statistical robustness
-    validation_years = [2009, 2003, 1994, 1989, 2019, 1984, 2010, 2017]
+    valtest_years = [2009, 2003, 1994, 1989, 1990, 2007, 2004, 2018]
+    val_years = [2009, 2003, 1994, 1989]
+    test_years = [1990, 2007, 2004, 2018]
 
-    in_data_val = in_data[in_data['year'].isin(validation_years)]
-    out_data_val = out_data[in_data['year'].isin(validation_years)]
-    in_data_tr = in_data[~in_data['year'].isin(validation_years)]
-    out_data_tr = out_data[~in_data['year'].isin(validation_years)]
+    in_data_valtest = in_data[in_data['year'].isin(valtest_years)]
+    out_data_valtest = out_data[in_data['year'].isin(valtest_years)]
+    in_data_val = in_data[in_data['year'].isin(val_years)]
+    out_data_val = out_data[in_data['year'].isin(val_years)]
+    in_data_test = in_data[in_data['year'].isin(test_years)]
+    out_data_test = out_data[in_data['year'].isin(test_years)]
+    in_data_tr = in_data[~in_data['year'].isin(valtest_years)]
+    out_data_tr = out_data[~in_data['year'].isin(valtest_years)]
             
     # drop the year column
     in_data = in_data.drop(columns=['year'])
     in_data_tr = in_data_tr.drop(columns=['year'])
     in_data_val = in_data_val.drop(columns=['year'])
+    in_data_valtest = in_data_valtest.drop(columns=['year'])
+    in_data_test = in_data_test.drop(columns=['year'])
 
 
 
@@ -181,8 +189,10 @@ def create_data(region='NorthSea'):
     x_train, _, y_train, _ = train_test_split(in_data_tr, out_data_tr, test_size=1, random_state=42)
 
     # randomize validation data
-    x_valtest, _, y_valtest, _ = train_test_split(in_data_val, out_data_val, test_size=1, random_state=42)
-    x_val, x_test, y_val, y_test = train_test_split(in_data_val, out_data_val, test_size=.5, random_state=42)
+    x_valtest, _, y_valtest, _ = train_test_split(in_data_valtest, out_data_valtest, test_size=1, random_state=42)
+    x_test, _, y_test, _ = train_test_split(in_data_test, out_data_test, test_size=1, random_state=42)
+    x_val, _, y_val, _ = train_test_split(in_data_val, out_data_val, test_size=1, random_state=42)
+    # x_val, x_test, y_val, y_test = train_test_split(in_data_val, out_data_val, test_size=.5, random_state=42)
 
     # split the data into training, validation and test set
     # x_train, x_test, y_train, y_test = train_test_split(in_data, out_data, test_size=0.2, random_state=42)
