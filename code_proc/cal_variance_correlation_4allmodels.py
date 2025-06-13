@@ -17,8 +17,10 @@ def add_variance_correlation2csv(region='NorthSea', csv='models.csv'):
     # load validation data
     #==============================================================================
 
-    tensor_in = aisst.load_tensor_from_csv('../data/ml_training/' + region + '/ml_input_data_valtest.csv')
-    tensor_out = aisst.load_tensor_from_csv('../data/ml_training/' + region + '/ml_output_data_valtest.csv')
+    # tensor_in = aisst.load_tensor_from_csv('../data/ml_training/' + region + '/ml_input_data_valtest.csv')
+    # tensor_out = aisst.load_tensor_from_csv('../data/ml_training/' + region + '/ml_output_data_valtest.csv')
+    tensor_in = aisst.load_tensor_from_csv('../data/ml_training/' + region + '/ml_input_data_test.csv')
+    tensor_out = aisst.load_tensor_from_csv('../data/ml_training/' + region + '/ml_output_data_test.csv')
 
     input_mean, input_std, output_mean, output_std = aisst.load_normalization_parameters(region)
 
