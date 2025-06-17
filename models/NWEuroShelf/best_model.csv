@@ -1,2 +1,2 @@
 name,type,shape,loss fn,drop_out,feature set,learning rate,epochs,epoch_minloss,file,correlation,r_median,r_mean,r_90,r_10
-NN3x32d.0 mse reduced,NN,3x32,mse,0.0,reduced,0.0001,30.0,29.0,../models/NWEuroShelf/reduced/torch_HL3x32d0_LFmse_epoch30.pth,0.59,1.00,0.77,0.73,1.84
+NN2x16d.0,NN,2x16,mse,0.0,reduced,0.0001,30.0,28.0,../models/NWEuroShelf/reduced/torch_HL2x16d0_LFmse_epoch30.pth,0.62,0.92,0.57,0.55,1.85

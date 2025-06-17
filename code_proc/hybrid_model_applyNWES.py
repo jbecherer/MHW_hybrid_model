@@ -63,7 +63,7 @@ def cal_hybrid_model4year(ds_org, bat, tides, year, scenario):
     input_tensor: torch.Tensor = torch.tensor(input_array, dtype=torch.float32)
 
     # load normalization parameters
-    norm_par: pd.DataFrame = pd.read_csv('./models/NWEuroShelf/ml_norm_mpi.csv', index_col=0)
+    norm_par: pd.DataFrame = pd.read_csv('../models/NWEuroShelf/ml_norm_mpi.csv', index_col=0)
     input_mean: np.array = norm_par['mean'].values[[0,1,4,5,6,8]]
     input_std: np.array = norm_par['std'].values[[0,1,4,5,6,8]]
 
@@ -144,8 +144,8 @@ def main(start_year=1982, end_year=2023, scenario='histssp585'):
     else:
         ds: xr.Dataset = xr.open_dataset('../data/mpi/mon/aisst_'+scenario+'_2015_2100_allvars.nc')
 
-    bat: xr.Dataset = xr.open_dataset('./data/bathymetry_1deg.nc')
-    tides: xr.Dataset = xr.open_dataset('./data/tidal_current_amplitude_1deg.nc')
+    bat: xr.Dataset = xr.open_dataset('../data/bathymetry_1deg.nc')
+    tides: xr.Dataset = xr.open_dataset('../data/tidal_current_amplitude_1deg.nc')
 
     years = [str(y) for y in range(start_year, end_year+1)]
     for year in years:

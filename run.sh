@@ -17,9 +17,10 @@ cd ./code_proc/
 # python generate_mpi_input_and_norm.py 2015 2100 histssp585
 # python generate_mpi_input_and_norm.py 2015 2100 ssp126
 # python generate_mpi_input_and_norm.py 2015 2100 ssp245
-python generate_mpi_input_and_norm.py 2015 2100 ssp370
+# python generate_mpi_input_and_norm.py 2015 2100 ssp370
 #
 # python hybrid_model_applyNWES.py
+# bash merge_hybridmodel_years.sh
 #
 # python -u cal_mean_sst.py 
 
