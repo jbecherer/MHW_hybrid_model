@@ -89,12 +89,12 @@ calculates all relevant statistics and writes them to a csv file.
 
 
 ## The Hybrid model
-### Data
+### Data preparation
 The data directory for MPI input data is  `./data/mpi/mon/` There are four base files that contain monthly averaged intput data from the MPI-ESM1.2 model. The files are: 
 - `aisst_histssp585.nc` 
 - `aisst_histssp126.nc`
 - `aisst_ssp245.nc` 
--`aisst_ssp370.nc`
+- `aisst_ssp370.nc`
 These cover the entire European Shelf including the Mediterranean sea. 
 
 
@@ -110,4 +110,15 @@ The script also generates the normalization parameters for the input data based 
 
 To genrate all these files, run the `run.sh` which calls the `generate_mpi_input_and_norm.py` script multiple times.
 
+### calculating the hybrid model SSTs
+`./code_proc/hybrid_model_applyNWES.py`
+After a best ML model is chosen and defined in the `./models/NWEuroShelf/best_model.csv` file, this script can be used to apply the hybrid model to the MPI input data, generated in the previous step.
+
+This will generate pretty large netcdf files in `./data/hyrbid_model/{scenario}` folder, which contain the hybrid model SSTs for each year and scenarios. 
+
+Afterwards you may use `./code_proc/merge_hybridmodel_years.sh` to merge the yearly files into one file per scenario. This will generate the files:
+- `../data/hyrbid_model/sst_hybrid_histssp585_1850-2100.nc`
+- `../data/hyrbid_model/sst_hybrid_ssp126_2015-2100.nc`
+- `../data/hyrbid_model/sst_hybrid_ssp245_2015-2100.nc`
+- `../data/hyrbid_model/sst_hybrid_ssp370_2015-2100.nc`
 
