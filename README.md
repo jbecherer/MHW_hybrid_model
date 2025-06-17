@@ -88,5 +88,26 @@ This scripts trains a linear regression and random forest model for a specified 
 calculates all relevant statistics and writes them to a csv file.
 
 
+## The Hybrid model
+### Data
+The data directory for MPI input data is  `./data/mpi/mon/` There are four base files that contain monthly averaged intput data from the MPI-ESM1.2 model. The files are: 
+- `aisst_histssp585.nc` 
+- `aisst_histssp126.nc`
+- `aisst_ssp245.nc` 
+-`aisst_ssp370.nc`
+These cover the entire European Shelf including the Mediterranean sea. 
+
+
+`generate_mpi_input_and_norm.py` :
+In a further processsing step, we extract only data from the North-West European Shelf, calculate the SST monthly slope, and extract differenrt time periods 1982-2023, 1850-1882, and 2015-2100 for each scenario respectively. 
+This generate the files:
+- `./data/mpi/mon/aisst_histssp585_1982_2023_allvars.nc`
+- `./data/mpi/mon/aisst_histssp585_1850_1982_allvars.nc`
+- `./data/mpi/mon/aisst_ssp126_2015_2100_allvars.nc`
+- `./data/mpi/mon/aisst_ssp246_2015_2100_allvars.nc`
+- `./data/mpi/mon/aisst_ssp370_2015_2100_allvars.nc`
+The script also generates the normalization parameters for the input data based on the Reference period (1982_2023), which are saved in `../models/NWEuroShelf/ml_norm_mpi.csv`. These parameters are used to normalize the input data for all time periods.
+
+To genrate all these files, run the `run.sh` which calls the `generate_mpi_input_and_norm.py` script multiple times.
 
 
