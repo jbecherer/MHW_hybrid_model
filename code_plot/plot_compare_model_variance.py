@@ -45,7 +45,7 @@ def plot_variance_correlation(region='NorthSea', csv='models.csv'):
     if figcols == 1:
         figcols = 2
     fig, ax = plt.subplots(2, figcols , figsize=(3.0*figcols*.9, 3*2*.9))
-    fig.subplots_adjust(hspace=0.04, wspace=0.04, bottom=0.1, top=0.99, left=0.1, right=0.99)
+    fig.subplots_adjust(hspace=0.04, wspace=0.04, bottom=0.1, top=0.99, left=0.15, right=0.99)
 
     xl = [-2.5, 0.4];
 
