@@ -24,6 +24,8 @@ cd ./code_proc/
 #
 # python -u cal_mean_sst.py 
 
+python -u cal_mhw_maps.py
+
 # la=3
 # python -u cal_mhw_maps_allScenarios.py $la
 # python -u cal_mhw_returnperiods.py $la
