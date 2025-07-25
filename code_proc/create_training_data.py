@@ -159,8 +159,6 @@ def create_data(region='NorthSea'):
     out_data = pd.DataFrame(out_data)
 
 
-    # years reserved for validation data picked at random one year from each decade
-    #validation_years = [1989, 1995, 2001, 2015]
     # larger test set for statistical robustness
     valtest_years = [2009, 2003, 1994, 1989, 1990, 2007, 2004, 2018]
     val_years = [2009, 2003, 1994, 1989]
