@@ -34,6 +34,8 @@ hyb = xr.open_dataset('../data/mhw/mhw_stats_hybrid_1982-2023.nc')
 bat = xr.open_dataset('../data/bathymetry_fullresolution.nc')
 bat = bat.coarsen(lat=20, lon=20, boundary='trim').mean()
 
+batlow_org = xr.open_dataset('../data/bathymetry_1deg.nc')
+
 # correct NpYear
 era['NpYear'] = era['NpYear'] 
 mpi['NpYear'] = mpi['NpYear'] 
@@ -54,15 +56,29 @@ max_lat = hyb.lat.max().values - 1
 min_lon = hyb.lon.min().values + 2
 max_lon = hyb.lon.max().values - 1
 
-pera = era.sel(lat=lat, lon=lon, method='nearest')
-pmpi = mpi.sel(lat=lat, lon=lon, method='nearest')
-pmlf = mlf.sel(lat=lat, lon=lon, method='nearest')
-phyb = hyb.sel(lat=lat, lon=lon, method='nearest')
-
 aera = era.sel(lat=slice(min_lat, max_lat), lon=slice(min_lon, max_lon))
 ampi = mpi.sel(lat=slice(min_lat, max_lat), lon=slice(min_lon, max_lon))
 amlf = mlf.sel(lat=slice(min_lat, max_lat), lon=slice(min_lon, max_lon))
 ahyb = hyb.sel(lat=slice(min_lat, max_lat), lon=slice(min_lon, max_lon))
+
+batlow = batlow_org.sel(lat=slice(min_lat, max_lat), lon=slice(min_lon, max_lon))
+
+# mask out deep water
+deepwater_mask = (batlow['elevation'].values > -200)
+# add member dimension to the mask
+deepwater_mask_ensemble = np.repeat(deepwater_mask[:,:, np.newaxis], ahyb.sizes['member'], axis=2)
+for var in list(aera.data_vars.keys()):
+    aera[var].values = np.where(deepwater_mask,  aera[var].values, np.nan)
+    ahyb[var].values = np.where(deepwater_mask_ensemble,  ahyb[var].values, np.nan)
+    ampi[var].values = np.where(deepwater_mask_ensemble,  ampi[var].values, np.nan)
+    amlf[var].values = np.where(deepwater_mask_ensemble,  amlf[var].values, np.nan)
+
+# mask deep water for map plot, but only for hybrid model
+batmap = batlow_org.sel(lat=slice(hyb.lat.min().values, hyb.lat.max().values), lon=slice(hyb.lon.min().values, hyb.lon.max().values))
+deepwater_mask_map = (batmap['elevation'].values > -200)
+deepwater_mask_map_ensemble = np.repeat(deepwater_mask_map[:, :, np.newaxis], ahyb.sizes['member'], axis=2)
+for var in list(hyb.data_vars.keys()):
+    hyb[var].values = np.where(deepwater_mask_map_ensemble,  hyb[var].values, np.nan)
 
 # # ignoere points that are nan in hybrid model
 # nonan = ~np.isnan(ahyb.NpYear) & ~np.isnan(ampi.NpYear) 
@@ -101,6 +117,7 @@ def bar_plot( features, aera, ahyb, ampi, amlf, labels=None):
         d1 = d1[~np.isnan(d1)]
         d2 = ahyb[col].values.flatten()
         d2 = d2[~np.isnan(d2)]
+        # d2 = d2[~np.isnan(d2) & deepwater_mask_ensemble.flatten()]
         d3 = ampi[col].values.flatten()
         d3 = d3[~np.isnan(d3)]
         d4 = amlf[col].values.flatten()
