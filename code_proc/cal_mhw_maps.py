@@ -79,7 +79,7 @@ for la in range(hybrid.lat.size):
             hybrid_stats.mean_peak_intensity[la, lo, m] = stats['mean_peak_intensity']
             hybrid_stats.max_peak_intensity[la, lo, m] = stats['max_peak_intensity']
 
-hybrid_stats.to_netcdf('../data/mhw/mhw_stats_hybrid.nc')
+hybrid_stats.to_netcdf('../data/mhw/mhw_stats_hybrid_1982-2023.nc')
 
 
 
@@ -106,7 +106,7 @@ for la in range(mpi.lat.size):
             mpilf_stats.mean_peak_intensity[la, lo, m] = stats['mean_peak_intensity']
             mpilf_stats.max_peak_intensity[la, lo, m] = stats['max_peak_intensity']
 
-mpilf_stats.to_netcdf('../data/mhw/mhw_stats_mpilf.nc')
+mpilf_stats.to_netcdf('../data/mhw/mhw_stats_mpilf_1982-2023.nc')
 
 
 era_stats = mhw_stats.copy(deep=True)
@@ -132,7 +132,7 @@ for la in range(era.lat.size):
             era_stats.mean_peak_intensity[la, lo] = stats['mean_peak_intensity']
             era_stats.max_peak_intensity[la, lo] = stats['max_peak_intensity']
 
-era_stats.to_netcdf('../data/mhw/mhw_stats_era.nc')
+era_stats.to_netcdf('../data/mhw/mhw_stats_era_1982-2023.nc')
 
 
 mpi_stats = mhw_stats.copy(deep=True)
@@ -155,7 +155,7 @@ for la in range(mpi.lat.size):
             mpi_stats.mean_peak_intensity[la, lo, m] = stats['mean_peak_intensity']
             mpi_stats.max_peak_intensity[la, lo, m] = stats['max_peak_intensity']
 
-mpi_stats.to_netcdf('../data/mhw/mhw_stats_mpi.nc')
+mpi_stats.to_netcdf('../data/mhw/mhw_stats_mpi_1982-2023.nc')
 
 
 
