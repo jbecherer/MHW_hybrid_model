@@ -122,3 +122,15 @@ Afterwards you may use `./code_proc/merge_hybridmodel_years.sh` to merge the yea
 - `../data/hyrbid_model/sst_hybrid_ssp245_2015-2100.nc`
 - `../data/hyrbid_model/sst_hybrid_ssp370_2015-2100.nc`
 
+## Marine Heatwave statistics
+
+### Reference period
+Calculate the marine heatwave statistics for the reference period (1982-2023) for ERA5 and the hybrid model and MPI-ESM using:
+- `./code_proc/cal_mhw_stats.py`
+This can also be started with the `run.sh` script. Be aware that this might take a couple of hours on a single core machine.
+The output is save in `./data/mhw/` and contains the following files:
+- `mhw_stats_era_1982-2023.nc`
+- `mhw_stats_hybrid_1982-2023.nc`
+- `mhw_stats_mpilf_1982-2023.nc`
+- `mhw_stats_mpi_1982-2023.nc`
+
