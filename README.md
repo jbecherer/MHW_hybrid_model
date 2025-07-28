@@ -17,6 +17,7 @@ It will contains the code necessary to generate all figures and tables featured 
 - matplotlib
 - cartopy
 - torch
+- cmocean
 
 ---
 ## main library
@@ -133,4 +134,8 @@ The output is save in `./data/mhw/` and contains the following files:
 - `mhw_stats_hybrid_1982-2023.nc`
 - `mhw_stats_mpilf_1982-2023.nc`
 - `mhw_stats_mpi_1982-2023.nc`
+
+#### Plotting the reference period statistics
+`./code_plot/plot_intercomparision_mhw_stats.py` This plots
+![[./figures/intercomp_mhw_maps.png]] ![[./figures/intercomp_mhw_area_shortstats.png`]]
 
