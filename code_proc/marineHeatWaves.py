@@ -282,15 +282,9 @@ def detect(t, temp, climatologyPeriod=[None,None], pctile=90, windowHalfWidth=5,
 
     # Length of climatological year
     lenClimYear = 366
-    # Start and end indices
-    clim_start = np.where(yearClim == climatologyPeriod[0])[0][0]
-    clim_end = np.where(yearClim == climatologyPeriod[1])[0][-1]
     # Inialize arrays
     thresh_climYear = np.NaN*np.zeros(lenClimYear)
     seas_climYear = np.NaN*np.zeros(lenClimYear)
-    clim = {}
-    clim['thresh'] = np.NaN*np.zeros(TClim)
-    clim['seas'] = np.NaN*np.zeros(TClim)
 
     
 
@@ -323,6 +317,9 @@ def detect(t, temp, climatologyPeriod=[None,None], pctile=90, windowHalfWidth=5,
             raise ValueError('External climatology must have 365 or 366 days')
 
     else: # Calculate climatology from temperature time series (original way)
+        # Start and end indices
+        clim_start = np.where(yearClim == climatologyPeriod[0])[0][0]
+        clim_end = np.where(yearClim == climatologyPeriod[1])[0][-1]
         # Loop over all day-of-year values, and calculate threshold and seasonal climatology across years
         for d in range(1,lenClimYear+1):
             # Special case for Feb 29
@@ -357,6 +354,9 @@ def detect(t, temp, climatologyPeriod=[None,None], pctile=90, windowHalfWidth=5,
             thresh_climYear = runavg(thresh_climYear, smoothPercentileWidth)
             seas_climYear = runavg(seas_climYear, smoothPercentileWidth)
 
+    clim = {}
+    clim['thresh'] = np.NaN*np.zeros(TClim)
+    clim['seas'] = np.NaN*np.zeros(TClim)
     # Generate threshold for full time series
     clim['thresh'] = thresh_climYear[doy.astype(int)-1]
     clim['seas'] = seas_climYear[doy.astype(int)-1]
