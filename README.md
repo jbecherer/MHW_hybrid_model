@@ -137,5 +137,5 @@ The output is save in `./data/mhw/` and contains the following files:
 
 #### Plotting the reference period statistics
 `./code_plot/plot_intercomparision_mhw_stats.py` This plots
-![[./figures/intercomp_mhw_maps.png]] ![[./figures/intercomp_mhw_area_shortstats.png`]]
+![](./figures/intercomp_mhw_maps.png) ![](./figures/intercomp_mhw_area_shortstats.png`)
 
