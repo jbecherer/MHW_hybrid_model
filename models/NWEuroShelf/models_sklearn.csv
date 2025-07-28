@@ -1,0 +1,3 @@
+name,type,shape,loss fn,drop_out,feature set,learning rate,epochs,epoch_minloss,file,correlation,r_median,r_mean,r_90,r_10
+linear regression,LR,,mse,,reduced,,,,../models/NWEuroShelf/Linear_Regression_reduced.pkl,0.51,1.06,0.56,0.51,1.83
+random forest,RF,,mse,,reduced,,,,../models/NWEuroShelf/RF_model_reduced.pkl,0.54,0.95,0.64,0.63,1.67

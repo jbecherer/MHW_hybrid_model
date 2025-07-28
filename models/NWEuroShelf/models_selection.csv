@@ -1,0 +1,18 @@
+name,type,shape,loss fn,drop_out,feature set,learning rate,epochs,epoch_minloss,file,correlation,r_median,r_mean,r_90,r_10
+NN2x16d.0,NN,2x16,mse,0.0,reduced,0.0001,1.0,0.0,../models/NWEuroShelf/reduced/torch_HL2x16d0_LFmse_epoch1.pth,0.53,0.87,0.56,0.53,2.21
+NN2x16d.0,NN,2x16,mse,0.0,reduced,0.0001,10.0,9.0,../models/NWEuroShelf/reduced/torch_HL2x16d0_LFmse_epoch10.pth,0.61,0.89,0.57,0.56,1.92
+NN2x16d.0,NN,2x16,mse,0.0,reduced,0.0001,30.0,28.0,../models/NWEuroShelf/reduced/torch_HL2x16d0_LFmse_epoch30.pth,0.62,0.92,0.57,0.55,1.85
+NN2x16d.0,NN,2x16,mse,0.0,reduced,0.0001,100.0,88.0,../models/NWEuroShelf/reduced/torch_HL2x16d0_LFmse_epoch100.pth,0.61,0.90,0.58,0.59,1.83
+NN2x16d.0,NN,2x16,mse,0.0,reduced,0.0001,200.0,66.0,../models/NWEuroShelf/reduced/torch_HL2x16d0_LFmse_epoch200.pth,0.60,0.94,0.59,0.57,1.91
+NN3x32d.0,NN,3x32,mse,0.0,reduced,0.0001,10.0,7.0,../models/NWEuroShelf/reduced/torch_HL3x32d0_LFmse_epoch10.pth,0.61,0.93,0.55,0.52,1.91
+NN3x32d.0,NN,3x32,mse,0.0,reduced,0.0001,30.0,28.0,../models/NWEuroShelf/reduced/torch_HL3x32d0_LFmse_epoch30.pth,0.59,0.93,0.60,0.58,1.89
+NN3x32d.0,NN,3x32,mse,0.0,reduced,0.0001,100.0,66.0,../models/NWEuroShelf/reduced/torch_HL3x32d0_LFmse_epoch100.pth,0.58,0.91,0.61,0.59,1.82
+NN5x32d.0,NN,5x32,mse,0.0,reduced,0.0001,30.0,22.0,../models/NWEuroShelf/reduced/torch_HL5x32d0_LFmse_epoch30.pth,0.59,0.88,0.58,0.57,1.84
+NN3x64d.0,NN,3x64,mse,0.0,reduced,0.0001,30.0,18.0,../models/NWEuroShelf/reduced/torch_HL3x64d0_LFmse_epoch30.pth,0.60,0.86,0.58,0.58,1.67
+NN5x64d.0,NN,5x64,mse,0.0,reduced,0.0001,30.0,18.0,../models/NWEuroShelf/reduced/torch_HL5x64d0_LFmse_epoch30.pth,0.60,0.90,0.59,0.57,1.81
+NN5x16d.0,NN,5x16,mse,0.0,reduced,0.0001,100.0,97.0,../models/NWEuroShelf/reduced/torch_HL5x16d0_LFmse_epoch100.pth,0.57,0.89,0.60,0.56,2.10
+NN2x32d.0,NN,2x32,mse,0.0,reduced,0.0001,100.0,61.0,../models/NWEuroShelf/reduced/torch_HL2x32d0_LFmse_epoch100.pth,0.59,0.93,0.58,0.55,1.84
+NN5x32d.0,NN,5x32,mse,0.0,reduced,0.0001,100.0,51.0,../models/NWEuroShelf/reduced/torch_HL5x32d0_LFmse_epoch100.pth,0.56,0.87,0.63,0.63,1.91
+NN2x64d.0,NN,2x64,mse,0.0,reduced,0.0001,30.0,28.0,../models/NWEuroShelf/reduced/torch_HL2x64d0_LFmse_epoch30.pth,0.60,0.94,0.58,0.57,1.73
+NN2x128d.0,NN,2x128,mse,0.0,reduced,0.0001,30.0,18.0,../models/NWEuroShelf/reduced/torch_HL2x128d0_LFmse_epoch30.pth,0.60,0.85,0.54,0.50,1.73
+NN5x128d.0,NN,5x128,mse,0.0,reduced,0.0001,30.0,15.0,../models/NWEuroShelf/reduced/torch_HL5x128d0_LFmse_epoch30.pth,0.58,0.89,0.61,0.63,1.75

@@ -1,0 +1,10 @@
+name,type,shape,loss fn,drop_out,feature set,learning rate,epochs,epoch_minloss,file,correlation,r_median,r_mean,r_90,r_10
+NN2x16d.0,NN,2x16,mse,0.0,reduced,0.0001,30.0,28.0,../models/NWEuroShelf/reduced/torch_HL2x16d0_LFmse_epoch30.pth,0.62,0.92,0.57,0.55,1.85
+NN3x32d.0,NN,3x32,mse,0.0,reduced,0.0001,30.0,28.0,../models/NWEuroShelf/reduced/torch_HL3x32d0_LFmse_epoch30.pth,0.59,0.93,0.60,0.58,1.89
+NN5x32d.0,NN,5x32,mse,0.0,reduced,0.0001,30.0,22.0,../models/NWEuroShelf/reduced/torch_HL5x32d0_LFmse_epoch30.pth,0.59,0.88,0.58,0.57,1.84
+NN3x64d.0,NN,3x64,mse,0.0,reduced,0.0001,30.0,18.0,../models/NWEuroShelf/reduced/torch_HL3x64d0_LFmse_epoch30.pth,0.60,0.86,0.58,0.58,1.67
+NN5x64d.0,NN,5x64,mse,0.0,reduced,0.0001,30.0,18.0,../models/NWEuroShelf/reduced/torch_HL5x64d0_LFmse_epoch30.pth,0.60,0.90,0.59,0.57,1.81
+NN2x128d.0,NN,2x128,mse,0.0,reduced,0.0001,30.0,18.0,../models/NWEuroShelf/reduced/torch_HL2x128d0_LFmse_epoch30.pth,0.60,0.85,0.54,0.50,1.73
+NN5x128d.0,NN,5x128,mse,0.0,reduced,0.0001,30.0,15.0,../models/NWEuroShelf/reduced/torch_HL5x128d0_LFmse_epoch30.pth,0.58,0.89,0.61,0.63,1.75
+linear regression,LR,,mse,,reduced,,,,../models/NWEuroShelf/Linear_Regression_reduced.pkl,0.51,1.06,0.58,0.54,1.79
+random forest,RF,,mse,,reduced,,,,../models/NWEuroShelf/RF_model_reduced.pkl,0.97,0.95,0.83,0.80,1.32
