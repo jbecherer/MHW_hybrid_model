@@ -123,6 +123,8 @@ Afterwards you may use `./code_proc/merge_hybridmodel_years.sh` to merge the yea
 - `../data/hyrbid_model/sst_hybrid_ssp245_2015-2100.nc`
 - `../data/hyrbid_model/sst_hybrid_ssp370_2015-2100.nc`
 
+---
+
 ## Marine Heatwave statistics
 
 ### Reference period
@@ -137,8 +139,10 @@ The output is save in `./data/mhw/` and contains the following files:
 
 #### Plotting the reference period statistics
 `./code_plot/plot_intercomparision_mhw_stats.py` This plots
-![](./figures/intercomp_mhw_maps.png) ![](./figures/intercomp_mhw_area_shortstats.png`)
+![](./figures/intercomp_mhw_maps.png) 
+![](./figures/intercomp_mhw_area_shortstats.png`)
 
+---
 
 ### Future period
 Calculate the marine heatwave statistics for all periods of the hybrid model and MPI-ESM using:
