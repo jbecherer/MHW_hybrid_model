@@ -139,3 +139,29 @@ The output is save in `./data/mhw/` and contains the following files:
 `./code_plot/plot_intercomparision_mhw_stats.py` This plots
 ![](./figures/intercomp_mhw_maps.png) ![](./figures/intercomp_mhw_area_shortstats.png`)
 
+
+### Future period
+Calculate the marine heatwave statistics for all periods of the hybrid model and MPI-ESM using:
+- `./code_proc/cal_mhw_maps_allScenarios.py`
+This calculation takes a long time, which we recommend to run it for each latitude band separately, which can be done with the `run.sh` script. The output is saved in `./data/mhw/` and contains file of the form: `mhw_stats_histssp585_la11.nc`.
+The calculation may still take many hours on a single core machine. 
+After all individual la-files are generated you can use:
+- `./code_proc/merge_latof_mhw_stats.py` to merge all lat-files into individual scenario files. This will generate the files:
+- `./data/mhw/merged_histssp585.nc`
+- `./data/mhw/merged_ssp126.nc`
+- `./data/mhw/merged_ssp245.nc`
+- `./data/mhw/merged_ssp370.nc`
+
+#### return periods
+To calculate the return periods you may use the script:
+- `./code_proc/cal_mhw_returnperiods.py`
+This script is also very expensive, which it is also run one latitude band at a time using the `run.sh`. The output is saved in `./data/mhw/return_histssp585_la11.nc` and contains the return periods for each latitude band.
+After all individual lat-files are generated you can use:
+- `./code_proc/merge_latof_mhw_return.py` to merge all lat-files into individual scenario files. This will generate the files:
+- `./data/mhw/merged_return_histssp585.nc`
+- `./data/mhw/merged_return_ssp126.nc`
+- `./data/mhw/merged_return_ssp245.nc`
+- `./data/mhw/merged_return_ssp370.nc`
+
+
+
