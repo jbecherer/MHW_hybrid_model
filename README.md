@@ -145,6 +145,8 @@ The output is save in `./data/mhw/` and contains the following files:
 ---
 
 ### Future period
+
+#### MHW statistics
 Calculate the marine heatwave statistics for all periods of the hybrid model and MPI-ESM using:
 - `./code_proc/cal_mhw_maps_allScenarios.py`
 This calculation takes a long time, which we recommend to run it for each latitude band separately, which can be done with the `run.sh` script. The output is saved in `./data/mhw/` and contains file of the form: `mhw_stats_histssp585_la11.nc`.
@@ -166,6 +168,16 @@ After all individual lat-files are generated you can use:
 - `./data/mhw/merged_return_ssp126.nc`
 - `./data/mhw/merged_return_ssp245.nc`
 - `./data/mhw/merged_return_ssp370.nc`
+
+
+#### calculate the mean SST trend
+To calculate the meant SST trend for each scenario, you can use the script:
+- `./code_proc/cal_mean_sst.py`
+This generates the files:
+- `./data/mhw/mSST_histssp585.nc`
+- `./data/mhw/mSST_ssp126.nc`
+- `./data/mhw/mSST_ssp245.nc`
+- `./data/mhw/mSST_ssp370.nc`
 
 
 
