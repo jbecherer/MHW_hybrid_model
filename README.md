@@ -158,6 +158,10 @@ After all individual la-files are generated you can use:
 - `./data/mhw/merged_ssp245.nc`
 - `./data/mhw/merged_ssp370.nc`
 
+##### Plot MHW statistics
+`./code_plot/plot_mhw_timeline.py`
+![]('./figures/mhw_timeline_shortlist.png')
+
 #### return periods
 To calculate the return periods you may use the script:
 - `./code_proc/cal_mhw_returnperiods.py`
