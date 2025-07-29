@@ -14,25 +14,53 @@ import seaborn as sns
 plt.switch_backend('agg')
 
 import importlib
+sys.path.append('../code_proc/')
 import aisst
 importlib.reload(aisst)
 
-sys.path.append('../external/marineHeatWaves/')
-import marineHeatWaves as mhw
-importlib.reload(mhw)
 
 #==============================================================================
 # load data
 #==============================================================================
 
+min_lat = 54
+max_lat = 58
+min_lon = 0
+max_lon = 7
 histssp585 = xr.open_dataset('../data/mhw/merged_histssp585.nc')
-hist = histssp585.sel(time=slice('1850', '2000'))
-ssp585 = histssp585.sel(time=slice('2030', '2100'))
-hist_ssp585 = histssp585.sel(time=slice('2000', '2030'))
+histssp585 = histssp585.sel(lat=slice(min_lat, max_lat), lon=slice(min_lon, max_lon))
 
 ssp126 = xr.open_dataset('../data/mhw/merged_ssp126.nc')
 ssp245 = xr.open_dataset('../data/mhw/merged_ssp245.nc')
 ssp370 = xr.open_dataset('../data/mhw/merged_ssp370.nc')
+ssp126 = ssp126.sel(lat=slice(min_lat, max_lat), lon=slice(min_lon, max_lon))
+ssp245 = ssp245.sel(lat=slice(min_lat, max_lat), lon=slice(min_lon, max_lon))
+ssp370 = ssp370.sel(lat=slice(min_lat, max_lat), lon=slice(min_lon, max_lon))
+
+# ignore cells deeper that 200 m
+batlow = xr.open_dataset('../data/bathymetry_1deg.nc')
+batlow = batlow.sel(lat=slice(min_lat, max_lat), lon=slice(min_lon, max_lon))
+deepwater_mask_map = (batlow['elevation'].values > -200)
+deepwater_mask_ssp = np.tile(
+    deepwater_mask_map[:, :, np.newaxis, np.newaxis],
+    (1, 1, ssp126.sizes['member'], ssp126.sizes['time'])
+)
+deepwater_mask_hist = np.tile(
+    deepwater_mask_map[:, :, np.newaxis, np.newaxis],
+    (1, 1, histssp585.sizes['member'], histssp585.sizes['time'])
+)
+for var in list(histssp585.data_vars.keys()):
+    histssp585[var].values = np.where(deepwater_mask_hist,  histssp585[var].values, np.nan)
+for var in list(ssp126.data_vars.keys()):
+    ssp126[var].values = np.where(deepwater_mask_ssp,  ssp126[var].values, np.nan)
+    ssp245[var].values = np.where(deepwater_mask_ssp,  ssp245[var].values, np.nan)
+    ssp370[var].values = np.where(deepwater_mask_ssp,  ssp370[var].values, np.nan)
+
+
+
+hist = histssp585.sel(time=slice('1850', '2000'))
+ssp585 = histssp585.sel(time=slice('2030', '2100'))
+hist_ssp585 = histssp585.sel(time=slice('2000', '2030'))
 
 # mean SST
 mSST_histssp585 = xr.open_dataset('../data/mhw/mSST_histssp585.nc')
