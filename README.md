@@ -140,7 +140,7 @@ The output is save in `./data/mhw/` and contains the following files:
 #### Plotting the reference period statistics
 `./code_plot/plot_intercomparision_mhw_stats.py` This plots
 ![](./figures/intercomp_mhw_maps.png) 
-![](./figures/intercomp_mhw_area_shortstats.png`)
+![](./figures/intercomp_mhw_area_shortstats.png)
 
 ---
 
@@ -160,7 +160,7 @@ After all individual la-files are generated you can use:
 
 ##### Plot MHW statistics
 `./code_plot/plot_mhw_timeline.py`
-![]('./figures/mhw_timeline_shortlist.png')
+![](./figures/mhw_timeline_shortlist.png)
 
 #### return periods
 To calculate the return periods you may use the script:
