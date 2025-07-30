@@ -173,6 +173,10 @@ After all individual lat-files are generated you can use:
 - `./data/mhw/merged_return_ssp245.nc`
 - `./data/mhw/merged_return_ssp370.nc`
 
+#### plot return periods
+`./code_plot/plot_mhw_return.py`
+![](./figures/mhw_return_period.png)![](./figures/mhw_return_period_time_series.png)
+
 
 #### calculate the mean SST trend
 To calculate the meant SST trend for each scenario, you can use the script:

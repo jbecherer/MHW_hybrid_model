@@ -14,12 +14,10 @@ import seaborn as sns
 plt.switch_backend('agg')
 
 import importlib
+sys.path.append('../code_proc/')
 import aisst
 importlib.reload(aisst)
 
-sys.path.append('../external/marineHeatWaves/')
-import marineHeatWaves as mhw
-importlib.reload(mhw)
 
 #==============================================================================
 # load data

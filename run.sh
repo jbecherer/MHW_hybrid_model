@@ -22,7 +22,7 @@ cd ./code_proc/
 # python hybrid_model_applyNWES.py
 # bash merge_hybridmodel_years.sh
 #
-# python -u cal_mean_sst.py 
+python -u cal_mean_sst.py 
 
 # python -u cal_mhw_maps.py
 
@@ -30,9 +30,9 @@ cd ./code_proc/
 # python -u cal_mhw_maps_allScenarios.py $la
 # python -u cal_mhw_returnperiods.py $la
 #
-mkdir -p logs
-for la in {0..12}; do
-    python -u cal_mhw_maps_allScenarios.py $la > ./logs/cal_mhw_maps_allScenarios_${la}.log 2>&1 &
-    python -u cal_mhw_returnperiods.py $la > ./logs/cal_mhw_returnperiods_${la}.log 2>&1 &
-done
-wait
+# mkdir -p logs
+# for la in {0..12}; do
+#     python -u cal_mhw_maps_allScenarios.py $la > ./logs/cal_mhw_maps_allScenarios_${la}.log 2>&1 &
+#     python -u cal_mhw_returnperiods.py $la > ./logs/cal_mhw_returnperiods_${la}.log 2>&1 &
+# done
+# wait
