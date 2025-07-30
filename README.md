@@ -175,7 +175,7 @@ After all individual lat-files are generated you can use:
 
 #### plot return periods
 `./code_plot/plot_mhw_return.py`
-![](./figures/mhw_return_period.png)![](./figures/mhw_return_period_time_series.png)
+![](./figures/mhw_return_period.png){width=45%} ![](./figures/mhw_return_period_time_series.png){width=45%}
 
 
 #### calculate the mean SST trend
