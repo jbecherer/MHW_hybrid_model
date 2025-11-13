@@ -7,3 +7,20 @@ code_proc/__pycache__/
 
 # ignore the random forrest model because too big
 models/NWEuroShelf/RF_model_reduced.pkl
+models/NWEuroShelf/reduced/torch_HL2x128d0_LFmse_epoch30.pth
+models/NWEuroShelf/reduced/torch_HL2x16d0_LFmse_epoch1.pth
+models/NWEuroShelf/reduced/torch_HL2x16d0_LFmse_epoch10.pth
+models/NWEuroShelf/reduced/torch_HL2x16d0_LFmse_epoch100.pth
+models/NWEuroShelf/reduced/torch_HL2x16d0_LFmse_epoch200.pth
+models/NWEuroShelf/reduced/torch_HL2x16d0_LFmse_epoch30.pth
+models/NWEuroShelf/reduced/torch_HL2x32d0_LFmse_epoch100.pth
+models/NWEuroShelf/reduced/torch_HL2x64d0_LFmse_epoch30.pth
+models/NWEuroShelf/reduced/torch_HL3x32d0_LFmse_epoch10.pth
+models/NWEuroShelf/reduced/torch_HL3x32d0_LFmse_epoch100.pth
+models/NWEuroShelf/reduced/torch_HL3x32d0_LFmse_epoch30.pth
+models/NWEuroShelf/reduced/torch_HL3x64d0_LFmse_epoch30.pth
+models/NWEuroShelf/reduced/torch_HL5x128d0_LFmse_epoch30.pth
+models/NWEuroShelf/reduced/torch_HL5x16d0_LFmse_epoch100.pth
+models/NWEuroShelf/reduced/torch_HL5x32d0_LFmse_epoch100.pth
+models/NWEuroShelf/reduced/torch_HL5x32d0_LFmse_epoch30.pth
+models/NWEuroShelf/reduced/torch_HL5x64d0_LFmse_epoch30.pth
