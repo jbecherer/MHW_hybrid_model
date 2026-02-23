@@ -318,11 +318,11 @@ fig.savefig('../figures/interanual_comp_maps_small.pdf')
 
 N=2
 projection = ccrs.PlateCarree()
-fig, ax = plt.subplots(np.round(N/2).astype(int), 2, figsize=(5.4*1.2, 1*1.7*N/2*1.2), subplot_kw={'projection': projection})
+fig, ax = plt.subplots(np.round(N/2).astype(int), 2, figsize=(5.4*1.2, 1*2*N/2*1.2), subplot_kw={'projection': projection})
 
 ax = ax.flatten()
 
-fig.subplots_adjust(hspace=0.05, wspace=0.05, bottom=0.12, top=0.95, left=0.12, right=0.98)
+fig.subplots_adjust(hspace=0.05, wspace=0.05, bottom=0.12, top=0.90, left=0.12, right=0.98)
 
 abc = 'abcdefghijklmnopqrstuvwxyz'
 for a in range(N):
@@ -332,7 +332,7 @@ for a in range(N):
     #     pc = ax[a].pcolor(lons, lats, Z[a], cmap=cmap[a], norm=colors.LogNorm(vmin=cl[a][0], vmax=cl[a][1]), transform=projection)
     
     axpos = ax[a].get_position()
-    cax  = fig.add_axes([axpos.x1-.22*axpos.width, axpos.y0+.02*axpos.height, .22*axpos.width, .015 ])
+    cax  = fig.add_axes([axpos.x0+.2*axpos.width, axpos.y1+.02*axpos.height, .6*axpos.width, .03 ])
     cb = fig.colorbar(pc , extend='both', cax=cax, orientation='horizontal') # ticks=[1,2,3])
     cb = fig.colorbar(pc , extend='both', cax=cax, orientation='horizontal') # ticks=[1,2,3])
     cax.xaxis.set_ticks_position('top')
