@@ -22,6 +22,8 @@ import aisst
 importlib.reload(aisst)
 
 plt.switch_backend('Agg')
+# switch backend to allow for interactive figures
+# plt.switch_backend('TkAgg')
 
 
 def load_model(models_df, i):
@@ -141,7 +143,7 @@ def cal_correlation_map(var_ref_grid, var_model_grid):
 
 tensor_val = aisst.load_tensor_from_csv('../data/interanual_comp/NWEuroShelf/interanual_data_val.csv')
 # tensor_val = aisst.load_tensor_from_csv('../data/interanual_comp/NWEuroShelf/interanual_data_valtest.csv')
-# tensor_val = aisst.load_tensor_from_csv('../data/interanual_comp/NWEuroShelf/interanual_data.csv')
+tensor_all = aisst.load_tensor_from_csv('../data/interanual_comp/NWEuroShelf/interanual_data.csv')
 
 
 #____process variance data____#
@@ -149,7 +151,17 @@ tensor_val = aisst.load_tensor_from_csv('../data/interanual_comp/NWEuroShelf/int
 # ERA5 reference variance
 var_ref = tensor_val.numpy()[:,-1]
 
+var_all = tensor_all.numpy()[:,-1]
+
+
 var_ref_grid, lats, lons, months = cluster_by_latlon_month(var_ref, tensor_val.numpy()[:,-5], tensor_val.numpy()[:,-4], tensor_val.numpy()[:,-3])
+var_all_grid, _, _, _ = cluster_by_latlon_month(var_all, tensor_all.numpy()[:,-5], tensor_all.numpy()[:,-4], tensor_all.numpy()[:,-3])
+# nanmean along the fourth axis (years) to create a climatology 
+var_clim = np.nanmedian(var_all_grid, axis=3)
+
+var_ml_all = cal_ml_variance(tensor_all)
+var_ml_all_grid, _, _, _ = cluster_by_latlon_month(var_ml_all, tensor_all.numpy()[:,-5], tensor_all.numpy()[:,-4], tensor_all.numpy()[:,-3])
+var_ml_clim = np.nanmedian(var_ml_all_grid, axis=3)
 
 # ML variance
 var_ml = cal_ml_variance(tensor_val)
@@ -195,7 +207,10 @@ labels = [r'med$(\sigma^2_T)$ for ERA5', r'med$(\sigma^2_T)$ for ML model', r'me
           r'log$_2(\sigma_{m}/\sigma_r)$ (winter DJF)', r'log$_2(\sigma_{m}/\sigma_r)$ (spring MAM)', r'log$_2(\sigma_{m}/\sigma_r)$ (summer JJA)', r'log$_2(\sigma_{m}/\sigma_r)$ (autumn SON)']
 
 cmap1 = cmocean.cm.dense
-cmap2 = cmocean.cm.thermal
+# cmap2 = cmocean.cm.thermal
+cmap2 = "turbo"
+cmap2 = "gnuplot"
+cmap2 = "gist_ncar"
 cmap3 = cmocean.cm.balance
 
 cmap = [ cmap1, cmap1, cmap3, cmap2,
@@ -316,27 +331,84 @@ for a in range(N):
 fig.savefig('../figures/interanual_comp_maps_small.png', dpi=300)
 fig.savefig('../figures/interanual_comp_maps_small.pdf')
 
-N=2
+N=4
 projection = ccrs.PlateCarree()
-fig, ax = plt.subplots(np.round(N/2).astype(int), 2, figsize=(5.4*1.2, 1*2*N/2*1.2), subplot_kw={'projection': projection})
+# fig, ax = plt.subplots(1, 3, figsize=(8*1.2, 1*2*2/2*1.2), subplot_kw={'projection': projection})
+# fig.subplots_adjust(hspace=0.05, wspace=0.05, bottom=0.12, top=0.90, left=0.12, right=0.98)
+
+fig, ax = plt.subplots(2, 3, figsize=(8*1.2, 2*2*2/2*1.2), subplot_kw={'projection': projection})
+fig.subplots_adjust(hspace=0.05, wspace=0.19, bottom=0.08, top=0.93, left=0.07, right=0.98)
 
 ax = ax.flatten()
 
-fig.subplots_adjust(hspace=0.05, wspace=0.05, bottom=0.12, top=0.90, left=0.12, right=0.98)
 
 abc = 'abcdefghijklmnopqrstuvwxyz'
-for a in range(N):
-    a1 = a+2
+
+# removed climatology
+var_ref_grid_no_clim = var_ref_grid - var_clim[:,:,:,np.newaxis]
+# var_ml_grid_no_clim = var_ml_grid - var_clim[:,:,:,np.newaxis]
+var_ml_grid_no_clim = var_ml_grid - var_ml_clim[:,:,:,np.newaxis]
+# var_ref_grid_no_clim = var_ref_grid - np.nanmean(var_ref_grid, axis=3)[:,:,:,np.newaxis]
+# var_ml_grid_no_clim = var_ml_grid - np.nanmean(var_ml_grid, axis=3)[:,:,:,np.newaxis]
+Z.append(cal_correlation_map(var_ref_grid_no_clim, var_ml_grid_no_clim))
+labels.append('corr($\sigma^2_{Tml}-[\sigma^2_{T}]_{cl}, \sigma^2_{Tera}-[\sigma^2_{T}]_{cl}$)')
+cl.append(cl[3])
+# cmap.append(cmap[3])
+cmap.append(cmap2)
+
+Z.append(np.log10(np.var(var_ref_grid, axis=(0,3))))
+labels.append(r'log$_{10}$(var($\sigma^2_{Tera}$))')
+cl.append([-2.5, -.5])
+cmap.append("gnuplot2")
+
+Z.append(np.log10(np.var(var_clim, axis=0)))
+labels.append(r'log$_{10}$(var($[\sigma^2_{T}]_{cl}$))')
+cl.append([-2.5, -.5])
+cmap.append("gnuplot2")
+# cmap.append(cmap2)
+
+
+Z.append(np.log10(np.var(var_ref_grid_no_clim, axis=(0,3))))
+labels.append(r'log$_{10}$(var($\sigma^2_{Tera}-[\sigma^2_{T}]_{cl}$))')
+cl.append([-2.5, -.5])
+cmap.append("gnuplot2")
+# cmap.append(cmap2)
+
+
+# var_ml_grid_no_clim = var_ml_grid - var_ml_clim[:,:,:,np.newaxis]
+# Z.append(cal_correlation_map(var_ref_grid_no_clim, var_ml_grid_no_clim))
+# labels.append('corr($\sigma^2_{tml}-\sigma^2_{clim_ml}, \sigma^2_{tera}-\sigma^2_{clim_era}$)')
+# cl.append(cl[3])
+# # cmap.append(cmap[3])
+# cmap.append("gist_ncar")
+# var_ref_summer = var_ref_grid[5:8,:,:,:]
+# var_ml_summer = var_ml_grid[5:8,:,:,:]
+# Z.append(cal_correlation_map(var_ref_summer, var_ml_summer))
+# labels.append('corr($\sigma^2_{Tml}$, $\sigma^2_{Tera}$) for summer (JJA)')
+# cl.append(cl[3])
+# cmap.append("gist_ncar")
+#
+# var_ref_winter = var_ref_grid[[0,1,11],:,:,:]
+# var_ml_winter = var_ml_grid[[0,1,11],:,:,:]
+# Z.append(cal_correlation_map(var_ref_winter, var_ml_winter))
+# labels.append('corr($\sigma^2_{Tml}$, $\sigma^2_{Tera}$) for winter (DJF)')
+# cl.append(cl[3])
+# cmap.append(cmap[3])
+
+fields = [2,3, 16, 17, 18, 19]
+for a, a1 in enumerate(fields):
+    # a1 = a+2
     pc = ax[a].pcolor(lons, lats, Z[a1], cmap=cmap[a1], vmin=cl[a1][0], vmax=cl[a1][1], transform=projection)
     # if ( cl[a] == cl_sig ) | ( cl[a] == cl_sig1 ):
     #     pc = ax[a].pcolor(lons, lats, Z[a], cmap=cmap[a], norm=colors.LogNorm(vmin=cl[a][0], vmax=cl[a][1]), transform=projection)
     
     axpos = ax[a].get_position()
-    cax  = fig.add_axes([axpos.x0+.2*axpos.width, axpos.y1+.02*axpos.height, .6*axpos.width, .03 ])
-    cb = fig.colorbar(pc , extend='both', cax=cax, orientation='horizontal') # ticks=[1,2,3])
+    cax  = fig.add_axes([axpos.x0+.2*axpos.width, axpos.y1+.02*axpos.height, .6*axpos.width, .02 ])
     cb = fig.colorbar(pc , extend='both', cax=cax, orientation='horizontal') # ticks=[1,2,3])
     cax.xaxis.set_ticks_position('top')
-    t = ax[a].text(0.01,  .95, labels[a1], horizontalalignment='left', verticalalignment='top', transform=ax[a].transAxes)
+    # cax.set_xlabel('labels[a1]') # remove x-axis label
+    # t = ax[a].text(0.01,  .95, labels[a1], horizontalalignment='left', verticalalignment='top', transform=ax[a].transAxes)
+    t = ax[a].text(0.99,  .01, labels[a1], horizontalalignment='right', verticalalignment='bottom', transform=ax[a].transAxes)
     # t.set_fontweight('bold')
     t.set_fontsize(12)
     t.set_backgroundcolor([1, 1, 1, .5])
@@ -351,16 +423,20 @@ for a in range(N):
     tabc.set_fontsize(14)
     tabc.set_backgroundcolor([1, 1, 1, .5])
 
-    if a in [0, 2]:
+    if a in [0, 3]:
         ax[a].set_yticks(np.arange(np.floor(minlat)+2, maxlat, 5), crs=ccrs.PlateCarree())
         lat_formatter = LatitudeFormatter()
         ax[a].yaxis.set_major_formatter(lat_formatter)
     else:
         ax[a].set_yticks([])
 
-    ax[a].set_xticks(np.arange(np.floor(minlon)+2, maxlon, 5), crs=ccrs.PlateCarree())
-    lon_formatter = LongitudeFormatter(zero_direction_label=True)
-    ax[a].xaxis.set_major_formatter(lon_formatter)
+    if a in [3, 4,5]:
+        ax[a].set_xticks(np.arange(np.floor(minlon)+2, maxlon, 5), crs=ccrs.PlateCarree())
+        lon_formatter = LongitudeFormatter(zero_direction_label=True)
+        ax[a].xaxis.set_major_formatter(lon_formatter)
+    else:
+        ax[a].set_xticks([])
+
 
 fig.savefig('../figures/interanual_comp_maps_smaller.png', dpi=300)
 fig.savefig('../figures/interanual_comp_maps_smaller.pdf')
